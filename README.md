@@ -176,6 +176,21 @@ require("telescope").setup({
 I use `vim.fn.stdpath("data")` to find the data path and then write a file called `monorepo.json`.
 This defaults to `$HOME/.local/share/nvim/` but can be changed in the config with `{ data_path = '/path/to/directory' }`
 
+An example `monorepo.json` could look like this:
+
+```json
+{
+  "/path/to/your/monorepo": [
+    "packages/project-a",
+    "packages/project-b",
+    "apps/*"
+  ],
+  "/path/to/your/worktrees/*": [
+    "apps/*"
+  ]
+}
+```
+
 ## Extras features I wanna add in the future
 
 - Lualine support??
