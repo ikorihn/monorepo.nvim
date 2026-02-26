@@ -4,7 +4,7 @@ local messages = require("monorepo.messages")
 local M = {}
 
 M.monorepoVars = {}
-M.currentMonorepo = vim.fn.getcwd()
+M.currentMonorepo = utils.get_git_root()
 
 M.config = {
   silent = false,
@@ -40,7 +40,7 @@ M.setup = function(config)
 
   vim.api.nvim_create_autocmd("SessionLoadPost", {
     callback = function()
-      M.change_monorepo(vim.fn.getcwd())
+      M.change_monorepo(utils.get_git_root())
     end,
   })
 end

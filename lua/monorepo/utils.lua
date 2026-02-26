@@ -2,6 +2,29 @@ local Path = require("plenary.path")
 
 local M = {}
 
+-- Get the git repository root directory
+-- Returns current directory if not in a git repository
+---@return string
+M.get_git_root = function()
+  local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
+  if not handle then
+    return vim.fn.getcwd()
+  end
+
+  local result = handle:read("*a")
+  handle:close()
+
+  -- Remove newline characters
+  result = result:gsub("[\n\r]", "")
+
+  -- Return current directory if git repository is not found or result is empty
+  if result == "" then
+    return vim.fn.getcwd()
+  end
+
+  return result
+end
+
 -- Get the relative directory of path param,
 ---@param file string
 ---@param netrw boolean
